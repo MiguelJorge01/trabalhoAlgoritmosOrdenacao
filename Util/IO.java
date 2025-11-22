@@ -1,7 +1,17 @@
 package Util;
+import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
 public class IO{
+
+    final static Scanner LER_TECLADO = new Scanner(System.in);
+
+    public static int lerInt(String msg) {
+        System.out.println(msg);
+        int n = LER_TECLADO.nextInt();
+        return n;
+    }
 
     public static int[] gerarValoresAleatorios(int n, int valor_min, int valor_max) {
         Random random = new Random();
@@ -73,12 +83,18 @@ public class IO{
         }
     }
 
-    //  MERGE SORT 
-    public static void mergeSort(int[] arr, int left, int right) {
+    //MERGE SORT
+    public static int[] mergeSort(int[] arr) {
+        int[] sorted = Arrays.copyOf(arr, arr.length);
+        mergeSortRecursive(sorted, 0, sorted.length - 1);
+        return sorted;
+    }
+
+    private static void mergeSortRecursive(int[] arr, int left, int right) {
         if (left < right) {
             int mid = (left + right) / 2;
-            mergeSort(arr, left, mid);
-            mergeSort(arr, mid + 1, right);
+            mergeSortRecursive(arr, left, mid);
+            mergeSortRecursive(arr, mid + 1, right);
             merge(arr, left, mid, right);
         }
     }
@@ -149,12 +165,18 @@ public class IO{
         System.arraycopy(output, 0, arr, 0, n);
     }
 
-    // QUICK SORT
-    public static void quickSort(int[] arr, int low, int high) {
+    //QUICK SORT
+    public static int[] quickSort(int[] arr) {
+        int[] sorted = Arrays.copyOf(arr, arr.length);
+        quickSortRecursive(sorted, 0, sorted.length - 1);
+        return sorted;
+    }
+
+    private static void quickSortRecursive(int[] arr, int low, int high) {
         if (low < high) {
             int pi = partition(arr, low, high);
-            quickSort(arr, low, pi - 1);
-            quickSort(arr, pi + 1, high);
+            quickSortRecursive(arr, low, pi - 1);
+            quickSortRecursive(arr, pi + 1, high);
         }
     }
 
@@ -175,5 +197,8 @@ public class IO{
         return i + 1;
     }
 
+    public static void divisoria() {
+        System.out.println("\n===========================================\n");
+    }
 
 }
